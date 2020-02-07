@@ -3,7 +3,7 @@ from game.utils import *
 
 print("start")
 config = "1011011010000011"
-selected_pos = 15
+selected_pos = 12
 board = Board(4, 2, 2, config)
 # board.display_info()
 to_flip = find_adjacent_tokens(4,selected_pos, config)
