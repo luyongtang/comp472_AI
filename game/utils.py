@@ -1,4 +1,12 @@
 import numpy as np
+fake_children = [
+    [1, 0, ['010110010']], [1, 1, ['010110010']], [1, 2, ['010110010']],
+    [2, 0, ['010110010']], [2, 1, ['010110010']], [2, 2, ['010110010']],
+    [3, 0, ['010110010']], [3, 1, ['010110010']], [3, 2, ['010110010']],
+    [4, 0, ['010110010']], [4, 1, ['010110010']], [4, 2, ['010110010']],
+    ]
+
+
 def flip(positions, config):
     print("========================START=======================")
     my_config = list(config)
@@ -55,5 +63,19 @@ def print_config(size, config):
     array = config_to_array(size, config)
     for item in array:
         print(item)
+
+def is_goal_state(config):
+    return "1" not in config
+
+
+def transform_pos(size, pos):
+    return size
+
+
+# temporary use
+def get_children(node):
+    if not node:
+        return []
+    return fake_children
 
 
