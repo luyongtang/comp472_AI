@@ -11,4 +11,5 @@ to_flip.append(selected_pos)
 print(flip(to_flip, config))
 print(config)
 print(calculate_heuristic(config))
+print_config(board.size,board.original_config)
 
