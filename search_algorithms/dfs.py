@@ -1,0 +1,69 @@
+from game import utils
+
+
+class DFS:
+    def __init__(self, size, max_depth, config):
+        self.initial_config = config
+        self.size = size
+        self.max_depth = max_depth - 1
+        self.is_solved = False
+        self.candidate_list = []
+        self.solution_list = []
+        self.search_list = []
+
+    def update_candidate(self, children):
+        return children.extend(self.candidate_list)
+
+    def add_to_search_list(self, config):
+        text = '0 0 ' + config + '\n'
+        print(text)
+        self.search_list.append(text)
+
+    def generate_solution(self):
+        if not self.is_solved:
+            return ['no solution']
+        output = []
+        text = "0 " + self.initial_config + '\n'
+        output.append(text)
+        for node in self.solution_list:
+            text = '' + utils.transform_pos(self.size, node[1]) + ' ' + node[2] + '\n'
+            output.append(text)
+        print('solution is: ', output)
+        return output
+
+    def generate_search_path(self):
+        print('search path: ', self.search_list)
+        return self.search_list
+
+    def search(self):
+        current_node = []
+        root = [0, 0, self.initial_config]
+        self.update_candidate(utils.get_children(root))
+        while len(self.candidate_list) <= 0 or self.is_solved:
+            current_node = self.candidate_list.pop(0)
+            if len(self.solution_list) < self.max_depth:
+                self.update_candidate(utils.get_children(current_node))
+            self.is_solved = utils.is_goal_state(current_node)
+            self.solution_list.append(current_node)
+            if self.is_solved:
+                # self.generate_solution()
+                return
+            if len(self.solution_list) < self.max_depth:  # explore the next child
+                print('add more to solution_list')
+                continue
+            else:
+                print('reach the max depth')
+                self.solution_list.pop()  # solution list is full so we cannot add more node
+                # top the first node in the candidates to check if it is a node in the previous depth
+                to_check = self.candidate_list[0]
+                if to_check[0] == (self.solution_list[self.max_depth-1])[0]:
+                    print('go up by 1 in depth')
+                    self.solution_list.pop()  # explore another parent node so we need to pop the current one
+        print('no solution is found')
+
+
+
+
+
+
+
