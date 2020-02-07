@@ -68,7 +68,11 @@ def is_goal_state(config):
 
 
 def transform_pos(size, pos):
-    return size
+    row_base = ord("A")
+    row = chr(int(pos/size)+row_base)
+    column_base = 1
+    column = column_base + int(pos % size)
+    return row+str(column)
 
 
 # temporary use
