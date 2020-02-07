@@ -10,6 +10,13 @@ def flip(positions, config):
     result = ''
     return result.join(my_config)
 
+def find_adjacent_tokens(size,pos, config):
+    adjacent = [(pos - size) < 0 and -1 or (pos - size),  # find pos of up
+                (pos + size) > len(config) and -1 or (pos + size),  # find pos of down
+                (pos % size) == 0 and -1 or (pos - 1),  # find pos of left
+                (pos % size) == (size - 1) and -1 or (pos + 1)]  # find pos of right
+    print(adjacent)
+    return adjacent
 
 def calculate_heuristic(config):
     my_list = list(config)
@@ -39,3 +46,5 @@ def print_config(size, config):
     array = config_to_array(size, config)
     for item in array:
         print(item)
+
+
