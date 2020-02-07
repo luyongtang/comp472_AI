@@ -44,7 +44,6 @@ def calculate_heuristic(config):
     return h
 
 def config_to_array(size,config):
-    print("printing config", config)
     my_config = list(config)
     index = 0
     array = []

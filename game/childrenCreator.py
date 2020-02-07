@@ -9,6 +9,16 @@ def create_children_settings(setting):
     print("board_size of puzzle", board_size )
     print("board_size of duplicate childens", len(duplicate_settings))
     flipped_settings = flip_settings(board_size, duplicate_settings)
+    flipped_settings.sort(key = lambda x:x[2])
+    return flipped_settings
+
+def print_settings(board_size, settings):
+    pos = 0
+    for item in settings:
+        print(pos)
+        print_config(board_size,item[2])
+        pos += 1
+
         
 def create_duplicates(setting, number_of_copies):
     copies = []
