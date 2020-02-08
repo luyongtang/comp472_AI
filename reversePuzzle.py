@@ -14,4 +14,4 @@ def create_reverse_puzzle(board_size, iteration):
         reverse_solution.append(transform_pos(board_size, rand_pos))
     solution = reverse_solution.copy()
     solution.reverse()    
-    return (config, reverse_solution, solution)
+    return [config, reverse_solution, solution]

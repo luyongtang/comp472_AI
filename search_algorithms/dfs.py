@@ -1,11 +1,10 @@
 from game import utils, childrenCreator
 
-
 class DFS:
     def __init__(self, size, max_depth, config):
         self.initial_config = config
         self.size = size
-        self.max_depth = max_depth - 1
+        self.max_depth = max_depth
         self.is_solved = False
         self.candidate_list = []
         self.solution_list = []
