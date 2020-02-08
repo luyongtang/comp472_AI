@@ -13,4 +13,3 @@ search = dfs.DFS(4, 3, config)
 search.search()
 search.generate_search_path()
 search.generate_solution()
-

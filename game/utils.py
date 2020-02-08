@@ -26,7 +26,7 @@ def flip(positions, config):
 
     return result.join(my_config)
 
-def find_adjacent_tokens(size,pos, config):
+def find_adjacent_tokens(size, pos, config):
     # print("GETTING POSITION")
     adjacent = [(pos - size) < 0 and -1 or (pos - size),  # find pos of up
                 (pos + size) >= len(config) and -1 or (pos + size),  # find pos of down

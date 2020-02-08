@@ -1,21 +1,23 @@
-array = [
-"0111111010000011",
-"0101001010000011",
-"1100010010000011",
-"1000011110000011",
-"0011101000000011",
-"1111100011000011",
-"1001000110100011",
-"1010010110010011",
-"1011111001001011",
-"1011001001100111",
-"1011010011110001",
-"1011011110110010",
-"1011011000001111",
-"1011011011001101",
-"1011011010100100",
-"1011011010010000"]
+from game.main import Board
+from game.utils import *
+from search_algorithms import dfs
+from reversePuzzle import *
 
-array.sort()
-for item in array:
-    print(item)
+print("start")
+# config = "1011011010000011"
+# config = "0000000000000000"
+config = "011101110"
+# config = "110010000"
+
+for i in range(1):
+    selected_pos = 12
+    board_size=3
+    max_depth=2
+    test_case = create_reverse_puzzle(board_size,max_depth)
+    #print(test_case)
+    board = Board(board_size, max_depth, 2, test_case[0])
+    search = dfs.DFS(board_size, max_depth, test_case[0])
+    search.search()
+    search.generate_search_path()
+    temp = search.generate_solution()
+    print(test_case[0],test_case[2],temp)

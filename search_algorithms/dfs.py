@@ -24,7 +24,7 @@ class DFS:
 
     def generate_solution(self):
         if not self.is_solved:
-            print('no solution')
+            #print('no solution')
             return ['no solution']
         output = []
         text = "0 " + self.initial_config + '\n'
@@ -32,11 +32,11 @@ class DFS:
         for node in self.solution_list:
             text = '' + utils.transform_pos(self.size, node[1]) + ' ' + node[2] + '\n'
             output.append(text)
-        print('solution is: ', output)
+        #print('solution is: ', output)
         return output
-
     def generate_search_path(self):
-        print('search path: ', self.search_list)
+
+        #print('search path: ', self.search_list)
         return self.search_list
 
     def search(self):
