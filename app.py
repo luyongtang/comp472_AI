@@ -1,15 +1,16 @@
 from game.main import Board
 from game.utils import *
+from search_algorithms import dfs
 
 print("start")
-config = "1011011010000011"
+# config = "1011011010000011"
+# config = "0000000000000000"
+config = "1100100000000000"
+# config = "110010000"
 selected_pos = 12
 board = Board(4, 2, 2, config)
-# board.display_info()
-to_flip = find_adjacent_tokens(4,selected_pos, config)
-to_flip.append(selected_pos)
-print(flip(to_flip, config))
-print(config)
-print(calculate_heuristic(config))
-print_config(board.size,board.original_config)
+search = dfs.DFS(4, 3, config)
+search.search()
+search.generate_search_path()
+search.generate_solution()
 

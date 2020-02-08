@@ -8,31 +8,31 @@ fake_children = [
 
 
 def flip(positions, config):
-    print("========================START=======================")
+    # print("========================START=======================")
     my_config = list(config)
-    print(config)
-    print(positions)
-    print("STARTING FLIPPING")
+    # print(config)
+    # print(positions)
+    # print("STARTING FLIPPING")
     for p in positions:
         if p == -1:
             continue
-        print(p)
+        # print(p)
         if my_config[p] == "0":
             my_config[p] = "1"
         else:
             my_config[p] = "0"
-    print("========================END=======================")
+    # print("========================END=======================")
     result = ''
 
     return result.join(my_config)
 
 def find_adjacent_tokens(size,pos, config):
-    print("GETTING POSITION")
+    # print("GETTING POSITION")
     adjacent = [(pos - size) < 0 and -1 or (pos - size),  # find pos of up
                 (pos + size) >= len(config) and -1 or (pos + size),  # find pos of down
                 (pos % size) == 0 and -1 or (pos - 1),  # find pos of left
                 (pos % size) == (size - 1) and -1 or (pos + 1)]  # find pos of right
-    print(adjacent)
+    # print(adjacent)
     return adjacent
 
 def calculate_heuristic(config):
