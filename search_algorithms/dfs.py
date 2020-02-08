@@ -18,7 +18,7 @@ class DFS:
         # print(self.candidate_list)
 
     def add_to_search_list(self, config):
-        text = '0 0 ' + config + '\n'
+        text = '0 0 0 ' + config + '\n'
         # print(text)
         self.search_list.append(text)
 
