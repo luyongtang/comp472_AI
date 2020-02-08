@@ -1,4 +1,4 @@
-from game import utils
+from game import utils, childrenCreator
 
 
 class DFS:
@@ -38,11 +38,11 @@ class DFS:
     def search(self):
         current_node = []
         root = [0, 0, self.initial_config]
-        self.update_candidate(utils.get_children(root))
+        self.update_candidate(childrenCreator.create_children_settings(root))
         while len(self.candidate_list) <= 0 or self.is_solved:
             current_node = self.candidate_list.pop(0)
             if len(self.solution_list) < self.max_depth:
-                self.update_candidate(utils.get_children(current_node))
+                self.update_candidate(childrenCreator.create_children_settings(root))
             self.is_solved = utils.is_goal_state(current_node)
             self.solution_list.append(current_node)
             if self.is_solved:
