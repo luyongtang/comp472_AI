@@ -45,7 +45,7 @@ class DFS:
             self.is_solved = True
             return
         current_node = []
-        root = [0, 0, self.initial_config]
+        root = [1, 0, self.initial_config]
         self.update_candidate(childrenCreator.create_children_settings(root))
         while len(self.candidate_list) > 0 and not self.is_solved:
             # print("while loop starts...")
@@ -65,13 +65,13 @@ class DFS:
                 continue
             else:
                 # print('reach the max depth')
-                self.solution_list.pop()  # solution list is full so we cannot add more node
-                # top the first node in the candidates to check if it is a node in the previous depth
                 if len(self.candidate_list) == 0:
                     continue
+                self.solution_list.pop()  # solution list is full so we cannot add more node
+                # top the first node in the candidates to check if it is a node in a less depth
                 to_check = self.candidate_list[0]
                 # print(self.solution_list)
-                if len(self.solution_list) > 0 and to_check[0] == (self.solution_list[len(self.solution_list)-1])[0]:
+                while len(self.solution_list) > 0 and to_check[0] <= (self.solution_list[len(self.solution_list)-1])[0]:
                     # print('go up by 1 in depth')
                     self.solution_list.pop()  # explore another parent node so we need to pop the current one
         # print('no solution is found')
