@@ -74,11 +74,9 @@ def transform_pos(size, pos):
     column = column_base + int(pos % size)
     return row+str(column)
 
-
 # temporary use
 def get_children(node):
     if not node:
         return []
     return fake_children
-
 

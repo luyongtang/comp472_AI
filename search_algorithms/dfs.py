@@ -33,8 +33,8 @@ class DFS:
             output.append(text)
         #print('solution is: ', output)
         return output
-    def generate_search_path(self):
 
+    def generate_search_path(self):
         #print('search path: ', self.search_list)
         return self.search_list
 
