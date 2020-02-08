@@ -1,5 +1,3 @@
-from game.childrenCreator import *
+from game.reader import *
 
-setting = [3,7,"1011011010000011"]
-
-create_children_settings(setting)
+board_puzzles = create_boards_from_file("sample/test.txt")
