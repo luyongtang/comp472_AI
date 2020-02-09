@@ -1,17 +1,25 @@
-from game.main import Board
-from game.utils import *
-from search_algorithms import dfs
+import sys
+from game.inputOutput import *
+from search_algorithms.dfs import DFS
 
-print("start")
-# config = "1011011010000011"
-# config = "0000000000000000"
-config = "1100100000000000"
-# config = "110010000"
-selected_pos = 12
-board = Board(4, 2, 2, config)
-search = dfs.DFS(4, 3, config)
-search.search()
-path = search.generate_search_path()
-print(path)
-sol = search.generate_solution()
-print(sol)
+#default path
+path = "sample/test.txt"
+if len(sys.argv)>1:
+    path = str(sys.argv[1])
+else:
+    print("No file path provided in argument. Exiting the app")
+    print("Using default path:", path)
+
+print()
+
+board_puzzles = create_boards_from_file(path)
+
+index = 0
+for puzzle in board_puzzles:
+    print(puzzle.size, puzzle.max_depth, puzzle.max_length, puzzle.original_config)
+    dfs = DFS(puzzle.size,puzzle.max_depth,puzzle.original_config)
+    dfs.search()
+    path = dfs.generate_search_path()
+    sol = dfs.generate_solution()
+    create_output_files_for_puzzle("dfs",index, path, sol)
+    index += 1

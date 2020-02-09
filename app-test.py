@@ -14,12 +14,12 @@ print("start")
 config = "011101110"
 # config = "110010000"
 
-for i in range(200):
+for i in range(10):
     selected_pos = 12
-    board_size=4
-    max_depth=15
+    board_size=10
+    max_depth=7
     test_case = create_reverse_puzzle(board_size,max_depth)
-    #test_case[0] = "101100011"
+    #test_case[0] = "111001011"
     #test_case[2] = ['A1', 'C3', 'A3']
     #print(test_case)
     board = Board(board_size, max_depth, 2, test_case[0])

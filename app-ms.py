@@ -1,14 +1,17 @@
-from game.inputOutput import *
-from search_algorithms.dfs import DFS
+from game.main import Board
+from game.utils import *
+from search_algorithms import dfs
 
-board_puzzles = create_boards_from_file("sample/test.txt")
-
-index = 0
-for puzzle in board_puzzles:
-    print(puzzle.size, puzzle.max_depth, puzzle.original_config)
-    dfs = DFS(puzzle.size,puzzle.max_depth,puzzle.original_config)
-    dfs.search()
-    path = dfs.generate_search_path()
-    sol = dfs.generate_solution()
-    create_output_files_for_puzzle("dfs",index, path, sol)
-    index += 1
+print("start")
+# config = "1011011010000011"
+# config = "0000000000000000"
+config = "1100100000000000"
+# config = "110010000"
+selected_pos = 12
+board = Board(4, 2, 2, config)
+search = dfs.DFS(4, 3, config)
+search.search()
+path = search.generate_search_path()
+print(path)
+sol = search.generate_solution()
+print(sol)
