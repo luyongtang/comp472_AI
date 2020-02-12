@@ -7,7 +7,7 @@ path = "sample/test.txt"
 if len(sys.argv)>1:
     path = str(sys.argv[1])
 else:
-    print("No file path provided in argument. Exiting the app")
+    print("No file path provided in argument")
     print("Using default path:", path)
 
 print()
