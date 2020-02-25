@@ -1,5 +1,5 @@
 import sys
-from game.inputOutput import *
+from game_setting.inputOutput import *
 from search_algorithms.dfs import DFS
 
 #default path

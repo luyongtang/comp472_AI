@@ -1,5 +1,5 @@
 from random import randrange
-from game.utils import *
+from game_setting.utils import *
 
 def create_reverse_puzzle(board_size, iteration):
     lis_length = board_size*board_size

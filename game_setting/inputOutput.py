@@ -1,5 +1,5 @@
 import csv
-from game.main import Board 
+from game_setting.board import Board 
 def create_boards_from_file(filepath):
     board_puzzles = []
     with open(filepath, 'r') as file:

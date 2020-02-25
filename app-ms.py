@@ -1,5 +1,5 @@
-from game.main import Board
-from game.utils import *
+from game_setting.board import Board
+from game_setting.utils import *
 from search_algorithms import dfs
 
 print("start")
