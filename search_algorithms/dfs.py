@@ -1,4 +1,4 @@
-from game import utils, childrenCreator
+from game_setting import utils, childrenCreator
 
 class DFS:
     def __init__(self, size, max_depth, config):

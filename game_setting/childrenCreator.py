@@ -1,5 +1,5 @@
 import math
-from game.utils import *
+from game_setting.utils import *
 from copy import copy, deepcopy
 
 def create_children_settings(setting):
