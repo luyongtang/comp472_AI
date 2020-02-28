@@ -27,9 +27,10 @@ class Search:
         if solutionnode:
             print("solution yeah!")
             solutionpath = self.collectsolutionpath(solutionnode)
-            for item in solutionpath:
-                print()
-                print_config(4,item)
+            #for item in solutionpath:
+            #    print()
+            #    print(item[0])
+            #    print_config(4,item[1])
         else:
             print("OUT")
 
@@ -75,9 +76,11 @@ class Search:
     def createnodefromconfigs(self, configslist, parentnode):
         nodes = []
         pathlength = parentnode.pathlength+1
-        for config in configslist:
+        for configprop in configslist:
+            position = configprop[0]
+            config = configprop[1]
             temp_board = Board(parentnode.board.size,None, parentnode.board.max_length,config)
-            temp_node = Node(temp_board, parentnode, pathlength)
+            temp_node = Node(temp_board, parentnode, pathlength, position)
             nodes.append(temp_node)
         return nodes
 
@@ -85,7 +88,7 @@ class Search:
         return self.traversetillroot([],solutionnode)
 
     def traversetillroot(self, pathlist, node):
-        pathlist.insert(0,node.board.config)
+        pathlist.insert(0,(node.flippedposition, node.board.config))
         if node.parent is None:
             return pathlist
         return self.traversetillroot(pathlist, node.parent)

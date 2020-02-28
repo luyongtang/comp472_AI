@@ -23,13 +23,14 @@ def generate_children_configs(config, board_size):
     return flipped_configs
 
 def flip_configs(config_list, board_size):
-    pos = 0
+    posindex = 0
     flipped_configs = []
     for config in config_list:
-        flipped_config= apply_flip(board_size, pos, config)
-        flip_pos = transform_pos(board_size, pos)
+        config = apply_flip(board_size, posindex, config)
+        position = transform_pos(board_size, posindex)
+        flipped = (position, config)
         flipped_configs.append(flipped)
-        pos +=1
+        posindex +=1
     return flipped_configs
 
 def print_settings(board_size, settings):
