@@ -24,7 +24,6 @@ class Search:
 
     def findsolution(self):
         solutionnode = self.search()
-        solutionnode = self.search()
         if solutionnode:
             print("solution yeah!")
         else:
