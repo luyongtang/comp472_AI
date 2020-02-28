@@ -39,7 +39,7 @@ def calculate_heuristic(config):
     my_list = list(config)
     h = 0
     for p in my_list:
-        if p == "0":
+        if p == "1":
             h += 1
     return h
 
