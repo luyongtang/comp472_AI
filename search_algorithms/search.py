@@ -11,8 +11,7 @@ class Search:
         node.finalscore += node.hscore
     def g(node):
         node.gscore = node.pathlength
-        node.finalscore += node.gscore
-        
+        node.finalscore += node.gscore   
     BFS = [h]
     Astar = [h,g]
     def __init__(self, board, searchalgo):
@@ -24,6 +23,7 @@ class Search:
         self.searchalgo = searchalgo
 
     def findsolution(self):
+        solutionnode = self.search()
         solutionnode = self.search()
         if solutionnode:
             print("solution yeah!")
@@ -41,8 +41,9 @@ class Search:
             #ignore this node, continue search
             return self.search()
         self.visitnode(node)
+        self.openlist.sort(key = lambda x:x.finalscore)
         for item in self.openlist:
-            print(item.finalscore, item.gscore, item.hscore)
+            print(item.finalscore)
         return False
     
     def addtoopenlist(self, nodelist):
@@ -67,11 +68,9 @@ class Search:
                 formula(node)
         return nodes
 
-        
     def createnodefromconfigs(self, configslist, parentnode):
         nodes = []
         pathlength = parentnode.pathlength+1
-        print(pathlength)
         for config in configslist:
             temp_board = Board(parentnode.board.size,None, parentnode.board.max_length,config)
             temp_node = Node(temp_board, parentnode, pathlength)
