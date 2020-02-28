@@ -40,9 +40,6 @@ class Search:
             #ignore this node, continue search
             return self.search()
         self.visitnode(node)
-        self.openlist.sort(key = lambda x:x.finalscore)
-        for item in self.openlist:
-            print(item.finalscore)
         return False
     
     def addtoopenlist(self, nodelist):
@@ -57,6 +54,7 @@ class Search:
         childrennodes = self.createnodefromconfigs(configs,node)
         nodeswithscores = self.calcularescore(childrennodes)
         self.openlist = self.openlist + nodeswithscores
+        self.openlist.sort(key = lambda x:x.finalscore)
         self.addtocloselist(node)
     
     def calcularescore(self, nodes):
