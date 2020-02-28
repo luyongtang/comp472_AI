@@ -7,7 +7,7 @@ from random import randrange
 
 class Search:
     def h(node):
-        node.hscore = randrange(100)
+        node.hscore = calculate_heuristic(node.board.config)
         node.finalscore += node.hscore
     def g(node):
         node.gscore = node.pathlength
@@ -18,7 +18,7 @@ class Search:
         self.initialboard = board
         self.openlist = []
         self.closelist = []
-        self.rootnode = Node(deepcopy(board), None,0)
+        self.rootnode = Node(deepcopy(board), None,0, 0)
         self.addtoopenlist([self.rootnode])
         self.searchalgo = searchalgo
 
@@ -26,10 +26,15 @@ class Search:
         solutionnode = self.search()
         if solutionnode:
             print("solution yeah!")
+            solutionpath = self.collectsolutionpath(solutionnode)
+            for item in solutionpath:
+                print()
+                print_config(4,item)
         else:
             print("OUT")
 
     def search(self):
+        print(len(self.closelist), len(self.openlist))
         if not self.openlist:
             return None
         #get best next node to visit
@@ -40,7 +45,9 @@ class Search:
             #ignore this node, continue search
             return self.search()
         self.visitnode(node)
-        return False
+        #for item in self.openlist:
+        #    print(item.finalscore)
+        return self.search()
     
     def addtoopenlist(self, nodelist):
         for node in nodelist:
@@ -74,6 +81,16 @@ class Search:
             nodes.append(temp_node)
         return nodes
 
+    def collectsolutionpath(self, solutionnode):
+        return self.traversetillroot([],solutionnode)
+
+    def traversetillroot(self, pathlist, node):
+        pathlist.insert(0,node.board.config)
+        if node.parent is None:
+            return pathlist
+        return self.traversetillroot(pathlist, node.parent)
+        
+        
 
 
 

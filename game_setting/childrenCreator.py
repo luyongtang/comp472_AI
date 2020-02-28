@@ -26,7 +26,9 @@ def flip_configs(config_list, board_size):
     pos = 0
     flipped_configs = []
     for config in config_list:
-        flipped_configs.append(apply_flip(board_size, pos, config))
+        flipped_config= apply_flip(board_size, pos, config)
+        flip_pos = transform_pos(board_size, pos)
+        flipped_configs.append(flipped)
         pos +=1
     return flipped_configs
 

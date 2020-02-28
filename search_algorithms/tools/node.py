@@ -1,6 +1,6 @@
 
 class Node:
-    def __init__(self, board, parent, pathlength):
+    def __init__(self, board, parent, pathlength, flippedposition):
         self.board = board
         self.parent = parent
         self.children = []
@@ -8,6 +8,7 @@ class Node:
         self.hscore = None
         self.gscore = None
         self.finalscore = None
+        self.flippedposition = flippedposition
 
     def getPathLength(self):
         return self.pathlength
