@@ -1,5 +1,3 @@
-import numpy as np
-
 
 class Board:
     def __init__(self, size, max_depth, max_length, config):

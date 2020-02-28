@@ -1,10 +1,13 @@
 
 class Node:
-    def __init__(self, board, parent, children, pathlength):
+    def __init__(self, board, parent, pathlength):
         self.board = board
         self.parent = parent
-        self.children = children
+        self.children = []
         self.pathlength = pathlength
+
+    def getPathLength(self):
+        return self.pathlength
     
-    def incrementpathlengh(self):
-        self.pathlength +=1
+    def reachedmaxpathlength(self):
+        return self.board.max_length<=self.pathlength

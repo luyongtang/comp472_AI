@@ -14,8 +14,6 @@ bfs = BFS(board)
 
 bfs.findsolution()
 
-
-
 exit()
 index = 0
 for puzzle in board_puzzles:
