@@ -1,7 +1,7 @@
 import sys
 from game_setting.inputOutput import *
 from search_algorithms.dfs import DFS
-from search_algorithms.bfs import BFS
+from search_algorithms.search import Search
 
 #default path
 path = "sample/test.txt"
@@ -10,7 +10,7 @@ if len(sys.argv)>1:
 
 board_puzzles = create_boards_from_file(path)
 board = board_puzzles[0]
-bfs = BFS(board)
+bfs = Search(board, Search.Astar)
 
 bfs.findsolution()
 

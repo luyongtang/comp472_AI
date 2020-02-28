@@ -3,14 +3,25 @@ from .tools.node import Node
 from game_setting.utils import *
 from game_setting.childrenCreator import *
 from game_setting.board import Board
+from random import randrange
 
-class BFS:
-    def __init__(self, board):
+class Search:
+    def h(node):
+        node.hscore = randrange(100)
+        node.finalscore += node.hscore
+    def g(node):
+        node.gscore = node.pathlength
+        node.finalscore += node.gscore
+        
+    BFS = [h]
+    Astar = [h,g]
+    def __init__(self, board, searchalgo):
         self.initialboard = board
         self.openlist = []
         self.closelist = []
         self.rootnode = Node(deepcopy(board), None,0)
         self.addtoopenlist([self.rootnode])
+        self.searchalgo = searchalgo
 
     def findsolution(self):
         solutionnode = self.search()
@@ -30,14 +41,9 @@ class BFS:
             #ignore this node, continue search
             return self.search()
         self.visitnode(node)
-        print(self.openlist)
+        for item in self.openlist:
+            print(item.finalscore, item.gscore, item.hscore)
         return False
-        #if is_goal_state(node.board.config):
-        #    print("solution found")
-        #    return
-        #self.closelist.insert(0,node)
-        #print(self.closelist)
-        #print("cool")
     
     def addtoopenlist(self, nodelist):
         for node in nodelist:
@@ -49,12 +55,23 @@ class BFS:
     def visitnode(self, node):
         configs = generate_children_configs(node.board.config, node.board.size)
         childrennodes = self.createnodefromconfigs(configs,node)
-        self.openlist = self.openlist + childrennodes
+        nodeswithscores = self.calcularescore(childrennodes)
+        self.openlist = self.openlist + nodeswithscores
         self.addtocloselist(node)
+    
+    def calcularescore(self, nodes):
+        for node in nodes:
+            node.initscore()
+        for formula in self.searchalgo:
+            for node in nodes:
+                formula(node)
+        return nodes
+
         
     def createnodefromconfigs(self, configslist, parentnode):
         nodes = []
-        pathlength = parentnode.board.max_length+1
+        pathlength = parentnode.pathlength+1
+        print(pathlength)
         for config in configslist:
             temp_board = Board(parentnode.board.size,None, parentnode.board.max_length,config)
             temp_node = Node(temp_board, parentnode, pathlength)
