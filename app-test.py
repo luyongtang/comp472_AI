@@ -17,7 +17,7 @@ config = "011101110"
 
 for i in range(100):
     #selected_pos = 12
-    board_size=7
+    board_size=10
     max_depth=10
     test_case = create_reverse_puzzle(board_size,max_depth)
     #test_case[0] = "111001011"
