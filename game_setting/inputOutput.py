@@ -17,3 +17,20 @@ def output_to_file(search_type, file_short_name, puzzle_number, paths):
     with open ('output/'+str(puzzle_number)+'_'+search_type+'_'+file_short_name+'.txt', 'w') as file:
         for path in paths:
             file.write(path)
+
+class Printer:
+    puzzlenumber = None
+    puzzletype = None
+    
+    def searchpath(node):
+        with open ('output/'+str(Printer.puzzlenumber)+'_'+Printer.puzzletype+'_search.txt', 'a') as file:
+            file.write(str(node.finalscore)+" "+str(node.gscore)+" "+str(node.hscore)+" "+str(node.board.config)+"\n")
+    
+    def solutionpath(paths):
+        with open ('output/'+str(Printer.puzzlenumber)+'_'+Printer.puzzletype+'_solution.txt', 'a') as file:
+            if not paths:
+                file.write("no solution")
+            else:
+                for path in paths:
+                    file.write( str(path[0])+" "+str(path[1])+"\n")
+            

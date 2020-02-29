@@ -4,6 +4,7 @@ from game_setting.utils import *
 from game_setting.childrenCreator import *
 from game_setting.board import Board
 from random import randrange
+from game_setting.inputOutput import *
 
 class Search:
     def h(node):
@@ -19,6 +20,7 @@ class Search:
         self.openlist = []
         self.closelist = []
         self.rootnode = Node(deepcopy(board), None,0, 0)
+        self.rootnode.initscore()
         self.addtoopenlist([self.rootnode])
         self.searchalgo = searchalgo
 
@@ -29,14 +31,17 @@ class Search:
             solutionnode = self.search()
             if solutionnode:
                 break
+
         if solutionnode:
-            print("solution yeah!")
+            #print("solution yeah!")
             solutionpath = self.collectsolutionpath(solutionnode)
+            Printer.solutionpath(solutionpath)
             #for item in solutionpath:
             #    print()
             #    print(item[0])
             #    print_config(4,item[1])
         else:
+            Printer.solutionpath(None)
             print("OUT")
 
     def search(self):
@@ -47,6 +52,7 @@ class Search:
             return node
         if node.reachedmaxpathlength() or node in self.closelist:
             #ignore this node, continue search
+            #print("scope out")
             return None
         self.visitnode(node)
         #for item in self.openlist:
@@ -67,6 +73,7 @@ class Search:
         self.openlist = self.openlist + nodeswithscores
         self.openlist.sort(key = lambda x:x.finalscore)
         self.addtocloselist(node)
+        Printer.searchpath(node)
     
     def calcularescore(self, nodes):
         for node in nodes:

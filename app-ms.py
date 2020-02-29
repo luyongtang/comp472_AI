@@ -16,11 +16,14 @@ bfs.findsolution()
 
 exit()
 index = 0
-for puzzle in board_puzzles:
-    print(puzzle.size, puzzle.max_depth, puzzle.max_length, puzzle.original_config)
-    dfs = DFS(puzzle.size,puzzle.max_depth,puzzle.original_config)
+for board in board_puzzles:
+    print(board.size, board.max_depth, board.max_length, board.original_config)
+    #DFS Search
+    dfs = DFS(board.size,board.max_depth,board.original_config)
     dfs.search()
     path = dfs.generate_search_path()
     sol = dfs.generate_solution()
     create_output_files_for_puzzle("dfs",index, path, sol)
+    #BFS
+    
     index += 1
