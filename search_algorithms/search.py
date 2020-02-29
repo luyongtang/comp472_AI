@@ -23,7 +23,12 @@ class Search:
         self.searchalgo = searchalgo
 
     def findsolution(self):
-        solutionnode = self.search()
+        #assume no solution at start
+        solutionnode = None
+        while self.openlist:
+            solutionnode = self.search()
+            if solutionnode:
+                break
         if solutionnode:
             print("solution yeah!")
             solutionpath = self.collectsolutionpath(solutionnode)
@@ -35,20 +40,18 @@ class Search:
             print("OUT")
 
     def search(self):
-        print(len(self.closelist), len(self.openlist))
-        if not self.openlist:
-            return None
+        #print(len(self.closelist), len(self.openlist))
         #get best next node to visit
         node = self.openlist.pop(0)
         if is_goal_state(node.board.config):
             return node
         if node.reachedmaxpathlength() or node in self.closelist:
             #ignore this node, continue search
-            return self.search()
+            return None
         self.visitnode(node)
         #for item in self.openlist:
         #    print(item.finalscore)
-        return self.search()
+        return None
     
     def addtoopenlist(self, nodelist):
         for node in nodelist:
