@@ -28,6 +28,7 @@ class Search:
     def findsolution(self):
         #assume no solution at start
         solutionnode = None
+        self.calcularescore(self.openlist)
         while self.openlist:
             solutionnode = self.search()
             if solutionnode:
@@ -44,6 +45,8 @@ class Search:
         #get best next node to visit
         node = self.openlist.pop(0)
         if is_goal_state(node.board.config):
+            self.addtocloselist(node)
+            Printer.searchpath(node)
             return node
         if node.reachedmaxpathlength() or self.check_duplicate_config(node, self.closelist) != -1:
             #ignore this node, continue search
