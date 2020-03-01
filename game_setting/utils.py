@@ -44,7 +44,8 @@ def calculate_heuristic(config):
             h += 1
     if 5 > h > 1:
         return 1
-    return math.floor(h/5)
+    return math.ceil(h/5)
+
 
 def config_to_array(size,config):
     my_config = list(config)
