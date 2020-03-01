@@ -5,6 +5,7 @@ from game_setting.childrenCreator import *
 from game_setting.board import Board
 from random import randrange
 from game_setting.inputOutput import *
+from operator import attrgetter
 
 class Search:
     def h(node):
@@ -19,7 +20,7 @@ class Search:
         self.initialboard = board
         self.openlist = []
         self.closelist = []
-        self.rootnode = Node(deepcopy(board), None,0, 0)
+        self.rootnode = Node(deepcopy(board), None,0, 0, board.config)
         self.rootnode.initscore()
         self.addtoopenlist([self.rootnode])
         self.searchalgo = searchalgo
@@ -63,13 +64,14 @@ class Search:
         for node in nodelist:
             check = self.check_duplicate_config(node, self.openlist)
             if check == -1:
-                # print("duplicate in open list")
                 self.openlist.append(node)
             # update the scores if a better path is found to current node
             elif self.openlist[check].finalscore > node.finalscore:
                 self.openlist[check].finalscore = node.finalscore
                 self.openlist[check].gscore = node.gscore
-                # print("update a better path")
+            #     print("update a better path")
+            # else:
+            #     print("duplicate!")
 
     def addtocloselist(self,node):
         self.closelist.insert(0,node)
@@ -80,7 +82,7 @@ class Search:
         nodeswithscores = self.calcularescore(childrennodes)
         # self.openlist = self.openlist + nodeswithscores
         self.addtoopenlist(nodeswithscores)
-        self.openlist.sort(key = lambda x:x.finalscore)
+        self.sort_open_list()
         self.addtocloselist(node)
         Printer.searchpath(node)
 
@@ -99,7 +101,7 @@ class Search:
             position = configprop[0]
             config = configprop[1]
             temp_board = Board(parentnode.board.size,None, parentnode.board.max_length,config)
-            temp_node = Node(temp_board, parentnode, pathlength, position)
+            temp_node = Node(temp_board, parentnode, pathlength, position, config)
             nodes.append(temp_node)
         return nodes
 
@@ -117,4 +119,8 @@ class Search:
             if element.board.config == node.board.config:
                 return index
         return -1
+
+    def sort_open_list(self):
+        self.openlist = sorted(self.openlist, key=attrgetter('config'))
+        self.openlist = sorted(self.openlist, key=attrgetter('finalscore'))
 
