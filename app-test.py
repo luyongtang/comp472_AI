@@ -1,8 +1,10 @@
 from game_setting.board import Board
 from game_setting.utils import *
+from game_setting.inputOutput import *
 from search_algorithms import dfs
 from reversePuzzle import *
 from search_algorithms.search import Search
+
 
 # "1110101111000100"
 # "1110111101101110"
@@ -17,12 +19,14 @@ config = "011101110"
 
 for i in range(100):
     #selected_pos = 12
-    board_size=10
-    max_depth=10
+    board_size=4
+    max_depth=3
     test_case = create_reverse_puzzle(board_size,max_depth)
     #test_case[0] = "111001011"
     #test_case[2] = ['A1', 'C3', 'A3']
-    #print(test_case)
+    print(test_case)
+    Printer.puzzlenumber=i
+    Printer.puzzletype="randomtest"
     board = Board(board_size, max_depth, 50, test_case[0])
     search = Search(board, Search.Astar)
     search.findsolution()
