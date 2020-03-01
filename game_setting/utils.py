@@ -1,4 +1,5 @@
 import numpy as np
+import math
 fake_children = [
     [1, 0, ['010110010']], [1, 1, ['010110010']], [1, 2, ['010110010']],
     [2, 0, ['010110010']], [2, 1, ['010110010']], [2, 2, ['010110010']],
@@ -41,7 +42,9 @@ def calculate_heuristic(config):
     for p in my_list:
         if p == "1":
             h += 1
-    return h
+    if 5 > h > 1:
+        return 1
+    return math.floor(h/5)
 
 def config_to_array(size,config):
     my_config = list(config)

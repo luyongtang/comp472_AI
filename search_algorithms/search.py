@@ -12,7 +12,7 @@ class Search:
         node.finalscore += node.hscore
     def g(node):
         node.gscore = node.pathlength
-        node.finalscore += node.gscore   
+        node.finalscore += node.gscore
     BFS = [h]
     Astar = [h,g]
     def __init__(self, board, searchalgo):
@@ -58,11 +58,12 @@ class Search:
         #for item in self.openlist:
         #    print(item.finalscore)
         return None
-    
+
     def addtoopenlist(self, nodelist):
         for node in nodelist:
-            self.openlist.append(node)
-    
+            if not self.check_duplicate_config(node, self.openlist):
+                self.openlist.append(node)
+
     def addtocloselist(self,node):
         self.closelist.insert(0,node)
 
@@ -70,11 +71,12 @@ class Search:
         configs = generate_children_configs(node.board.config, node.board.size)
         childrennodes = self.createnodefromconfigs(configs,node)
         nodeswithscores = self.calcularescore(childrennodes)
-        self.openlist = self.openlist + nodeswithscores
+        # self.openlist = self.openlist + nodeswithscores
+        self.addtoopenlist(nodeswithscores)
         self.openlist.sort(key = lambda x:x.finalscore)
         self.addtocloselist(node)
         Printer.searchpath(node)
-    
+
     def calcularescore(self, nodes):
         for node in nodes:
             node.initscore()
@@ -102,9 +104,10 @@ class Search:
         if node.parent is None:
             return pathlist
         return self.traversetillroot(pathlist, node.parent)
-        
-        
 
+    def check_duplicate_config(self, node, list_to_check):
+        for element in list_to_check:
+            if element.board.config == node.board.config:
+                return True
+        return False
 
-
-    
