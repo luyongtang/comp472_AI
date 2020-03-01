@@ -50,9 +50,9 @@ class Search:
         node = self.openlist.pop(0)
         if is_goal_state(node.board.config):
             return node
-        if node.reachedmaxpathlength() or node in self.closelist:
+        if node.reachedmaxpathlength() or self.check_duplicate_config(node, self.closelist) != -1:
             #ignore this node, continue search
-            #print("scope out")
+            # print("scope out")
             return None
         self.visitnode(node)
         #for item in self.openlist:
@@ -61,8 +61,15 @@ class Search:
 
     def addtoopenlist(self, nodelist):
         for node in nodelist:
-            if not self.check_duplicate_config(node, self.openlist):
+            check = self.check_duplicate_config(node, self.openlist)
+            if check == -1:
+                # print("duplicate in open list")
                 self.openlist.append(node)
+            # update the scores if a better path is found to current node
+            elif self.openlist[check].finalscore > node.finalscore:
+                self.openlist[check].finalscore = node.finalscore
+                self.openlist[check].gscore = node.gscore
+                # print("update a better path")
 
     def addtocloselist(self,node):
         self.closelist.insert(0,node)
@@ -106,8 +113,8 @@ class Search:
         return self.traversetillroot(pathlist, node.parent)
 
     def check_duplicate_config(self, node, list_to_check):
-        for element in list_to_check:
+        for index, element in enumerate(list_to_check):
             if element.board.config == node.board.config:
-                return True
-        return False
+                return index
+        return -1
 
