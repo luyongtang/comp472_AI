@@ -34,30 +34,21 @@ class Search:
                 break
 
         if solutionnode:
-            #print("solution yeah!")
+            #solution found
             solutionpath = self.collectsolutionpath(solutionnode)
             Printer.solutionpath(solutionpath)
-            #for item in solutionpath:
-            #    print()
-            #    print(item[0])
-            #    print_config(4,item[1])
         else:
             Printer.solutionpath(None)
-            print("OUT")
 
     def search(self):
-        #print(len(self.closelist), len(self.openlist))
         #get best next node to visit
         node = self.openlist.pop(0)
         if is_goal_state(node.board.config):
             return node
         if node.reachedmaxpathlength() or self.check_duplicate_config(node, self.closelist) != -1:
             #ignore this node, continue search
-            # print("scope out")
             return None
         self.visitnode(node)
-        #for item in self.openlist:
-        #    print(item.finalscore)
         return None
 
     def addtoopenlist(self, nodelist):
@@ -69,9 +60,6 @@ class Search:
             elif self.openlist[check].finalscore > node.finalscore:
                 self.openlist[check].finalscore = node.finalscore
                 self.openlist[check].gscore = node.gscore
-            #     print("update a better path")
-            # else:
-            #     print("duplicate!")
 
     def addtocloselist(self,node):
         self.closelist.insert(0,node)
@@ -80,7 +68,6 @@ class Search:
         configs = generate_children_configs(node.board.config, node.board.size)
         childrennodes = self.createnodefromconfigs(configs,node)
         nodeswithscores = self.calcularescore(childrennodes)
-        # self.openlist = self.openlist + nodeswithscores
         self.addtoopenlist(nodeswithscores)
         self.sort_open_list()
         self.addtocloselist(node)

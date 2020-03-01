@@ -17,7 +17,7 @@ print("start")
 config = "011101110"
 # config = "110010000"
 
-for i in range(100):
+for i in range(2):
     #selected_pos = 12
     board_size=4
     max_depth=3
